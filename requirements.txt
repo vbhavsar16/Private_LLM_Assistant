@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+sentence-transformers
+faiss-cpu
+pymupdf
+python-docx
+langchain
+transformers
+torch
+accelerate
+bitsandbytes

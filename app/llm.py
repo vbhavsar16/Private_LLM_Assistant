@@ -1,14 +1,10 @@
-# app/llm.py
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
-import torch
+from app.config import LLM_MODEL_NAME
 
-tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.1", use_fast=True)
-model = AutoModelForCausalLM.from_pretrained(
-    "mistralai/Mistral-7B-Instruct-v0.1",
-    device_map="auto",
-    load_in_4bit=True,  # Uses bitsandbytes
-    torch_dtype=torch.float16
-)
+cache_dir = "./cache"
+
+tokenizer = AutoTokenizer.from_pretrained(LLM_MODEL_NAME, cache_dir=cache_dir)
+model = AutoModelForCausalLM.from_pretrained(LLM_MODEL_NAME, cache_dir=cache_dir, torch_dtype="auto")
 
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 
